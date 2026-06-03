@@ -1,3 +1,10 @@
-/__pycache__
+/__pycache__/
 .env*
-/env
+/env/
+/venv/
+.ipynb_checkpoints/
+artifacts/*.pt
+artifacts/*.pth
+artifacts/*.json
+# Kecuali jika ada README di artifacts
+!artifacts/README.md

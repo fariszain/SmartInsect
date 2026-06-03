@@ -1,0 +1,22 @@
+# Node.js (Frontend dependencies and build outputs)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env*
+
+# Python (Backend dependencies and cache)
+backend/__pycache__/
+backend/.env*
+backend/env/
+backend/venv/
+backend/artifacts/*.pt
+backend/artifacts/*.pth
+backend/artifacts/*.json
+
+# IDEs & System files
+.vscode/
+.idea/
+.DS_Store
+*.log
+.ipynb_checkpoints/
