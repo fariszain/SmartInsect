@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "LensArthropoda — Identifikasi Serangga Cerdas",
   description:
     "Sistem identifikasi spesies serangga otomatis berbasis Deep Learning (EfficientNet-B3) dengan wawasan AI Gemini 2.5 Flash. Final Project Pembelajaran Mesin 2026.",
-  keywords: ["serangga", "insect identifier", "deep learning", "pytorch", "machine learning"],
+  keywords: ["serangga", "insect", "deep learning", "pytorch", "machine learning", "gemini"],
 };
 
 export default function RootLayout({
@@ -21,11 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="id"
-      className={`${inter.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="id" className={`${inter.variable} antialiased`}>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }

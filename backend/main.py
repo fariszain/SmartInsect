@@ -26,7 +26,7 @@ app.add_middleware(
 
 # Tentukan lokasi model dan metadata
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "artifacts", "model_torchscript.pt")
+MODEL_PATH = os.path.join(BASE_DIR, "artifacts", "model_scripted.pt")
 METADATA_PATH = os.path.join(BASE_DIR, "artifacts", "model_metadata.json")
 
 # Inisialisasi kebutuhan model klasifikasi
