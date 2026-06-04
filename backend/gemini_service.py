@@ -46,16 +46,16 @@ class GeminiExpert:
         # Inisialisasi Google GenAI client
         self.client = genai.Client(api_key=api_key)
 
-    def get_insect_info(self, insect_name: str) -> str:
+    def get_insect_info(self, insect_name: str, image_bytes: bytes = None, mime_type: str = "image/jpeg") -> str:
         # Normalisasi nama serangga (lowercase dan ganti spasi dengan underscore)
         clean_name = insect_name.lower().replace(" ", "_").strip()
         
         prompt = f"""
-        Berdasarkan hasil identifikasi gambar, serangga ini adalah "{insect_name}".
-        Tolong berikan informasi detail dengan format yang rapi dan menarik:
-        - Nama Ilmiah:
+        Berdasarkan hasil klasifikasi model awal, serangga ini tergolong sebagai "{insect_name}".
+        Tolong lihat gambar yang disertakan, lakukan identifikasi visual yang lebih spesifik, lalu berikan informasi detail dengan format yang rapi dan menarik:
+        - Nama Ilmiah: (Sebutkan nama ilmiah paling spesifik yang bisa Anda identifikasi dari gambar. Jika berupa serangga umum seperti capung/belalang, coba identifikasi genus dan spesies spesifiknya berdasarkan penampakan fisiknya di foto)
         - Nama Umum:
-        - Spesies:
+        - Spesies: (Sebutkan nama spesies spesifik, misal Pantala flavescens untuk capung kembara, dll.)
         - Genus:
         - Famili:
         - Habitat:
@@ -64,11 +64,21 @@ class GeminiExpert:
         Berikan jawaban langsung tanpa basa-basi pengantar atau penutup. Gunakan bahasa Indonesia yang baik dan benar.
         """
         
+        contents = []
+        if image_bytes:
+            contents.append(
+                types.Part.from_bytes(
+                    data=image_bytes,
+                    mime_type=mime_type
+                )
+            )
+        contents.append(prompt)
+        
         try:
             # Gunakan model gemini-2.5-flash untuk performa terbaik dengan ThinkingConfig dan Search Grounding
             response = self.client.models.generate_content(
                 model="gemini-2.5-flash",
-                contents=prompt,
+                contents=contents,
                 config=types.GenerateContentConfig(
                     thinking_config=types.ThinkingConfig(thinking_budget=2048),
                     tools=[types.Tool(google_search=types.GoogleSearch())]

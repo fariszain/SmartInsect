@@ -73,7 +73,7 @@ async def analyze_image(file: UploadFile = File(...)):
         
         # Mengambil informasi detail dari Gemini AI
         try:
-            ai_insight = gemini_expert.get_insect_info(top_prediction)
+            ai_insight = gemini_expert.get_insect_info(top_prediction, image_bytes, file.content_type)
         except Exception as gemini_error:
             print(f"Peringatan Gemini API: {gemini_error}")
             # Contoh template pesan ketika Gemini gagal memberikan response
